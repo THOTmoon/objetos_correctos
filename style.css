@@ -140,12 +140,16 @@ body {
        bottom: 20px lo coloca 20px desde la parte inferior del contenedor padre.
        Puedes ajustar este valor o usar top: XX% para posiciones relativas.
     */
-    bottom: 20px; 
+    bottom: 10%; 
     
-    z-index: 2; 
+    z-index: 2;
     padding: 12px 25px;
     font-size: 1.1em;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+    /* Añadimos un ancho máximo para asegurar que no se estire demasiado en pantallas anchas */
+    width: 80%;
+    max-width: 300px;
 }
 
 /* Contenedor para el logo y el botón en la pantalla de inicio */
@@ -337,3 +341,4 @@ button:hover { background-color: #357abd; }
     right: 2px;
 
 }
+

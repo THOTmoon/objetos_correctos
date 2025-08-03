@@ -1,6 +1,6 @@
 // src/main.js (VERSIÓN FINAL CON NUEVO FLUJO)
 
-import { gameConfig } from './config/gameconfig.js'; 
+import { gameConfig } from './config/gameConfig.js'; 
 import GameManager from './game/gamemanager.js';
 import AssetLoader from './utils/assetloader.js';
 import ScreenManager from './ui/screenmanager.js';
@@ -88,5 +88,6 @@ async function main() {
         screens.loading.innerHTML = `<h1>Error al cargar</h1><p>No se pudo iniciar el juego. Revisa la consola (F12) para más detalles.</p>`;
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', main);

@@ -1,0 +1,344 @@
+/* --- ESTILOS GLOBALES Y VARIABLES --- */
+:root {
+    --primary-bg: #f0f8ff;
+    --game-container-bg: #ffffff;
+    --accent-color: #4a90e2;
+    --text-color: #333333;
+    --correct-color: #28a745;
+    --incorrect-color: #dc3545;
+    --border-radius: 8px;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* 1. MODIFICACIÓN CRÍTICA a la clase .screen para el efecto de difuminado */
+.screen {
+    /* ... (propiedades existentes como width, height, position, etc.) */
+    transition: opacity 0.5s ease-in-out; /* ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ PRESENTE */
+}
+
+
+/* 2. NUEVOS ESTILOS para la pantalla de splash */
+#splash-screen {
+    /* Ruta relativa simple. El navegador sabe cómo encontrarla. */
+    background-image: url('assets/images/buhosabio.png');
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/* --- CONTENEDOR PRINCIPAL DEL JUEGO (RECUPERADO) --- */
+#game-container {
+    width: 100%;
+    height: 100vh;
+    max-width: 450px;
+    max-height: 800px;
+    background-color: var(--game-container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- GESTIÓN DE PANTALLAS (VERSIÓN CORREGIDA CON FADE) --- */
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    /* Clave: Por defecto, todas las pantallas son transparentes y no interactivas */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Asegura que no se pueda hacer clic en pantallas ocultas */
+
+    /* La transición se aplica a la propiedad 'opacity' */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+
+    /* Mantenemos flex para el layout interno de las pantallas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.screen.active {
+    /* La pantalla activa se vuelve totalmente opaca y visible */
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Se puede interactuar con la pantalla activa */
+}
+
+/* --- ESTILOS PARA PANTALLAS ESPECÍFICAS --- */
+#start-screen h1, #end-screen h1 { font-size: 2.5em; margin-bottom: 10px; }
+
+/* Añade o modifica este bloque para centrar mejor el contenido de la pantalla de inicio */
+#start-screen {
+    /* Asegura que el fondo cubra todo el área del elemento */
+    background-color: #FFE5B4; /* El color naranja suave aplicado anteriormente */
+    /* Asegura que el fondo no se repita y cubra todo */
+    background-size: cover;
+    /* Evita que el contenido se salga del área definida */
+    overflow: hidden;
+    /* Asegura que el z-index sea explícito si hay otros elementos absolutos */
+    z-index: 1;
+}
+
+#start-screen {
+    /* Fondo naranja suave */
+    background-color: #f38e2f; /* Un tono de durazno/naranja suave. Puedes ajustar el código de color si se quiere otro tono específico. */
+}
+
+.game-logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
+    max-width: 420px;
+}
+
+/* Asegúrate de que el botón también se vea bien */
+#start-screen button {
+    /* Puedes ajustar el ancho del botón si es necesario, por ejemplo: */
+    width: 80%; 
+    max-width: 300px;
+}
+
+/* Estilo específico para el botón de inicio dentro de la pantalla de inicio */
+#start-screen #start-game-btn {
+    /* Posicionamiento absoluto para superponerlo */
+    position: absolute;
+    /* Centrado horizontal: 
+       left: 50% mueve el borde izquierdo al centro del contenedor padre.
+       transform: translateX(-50%) mueve el elemento hacia la izquierda la mitad de su propio ancho.
+    */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Posicionamiento vertical: 
+       bottom: 20px lo coloca 20px desde la parte inferior del contenedor padre.
+       Puedes ajustar este valor o usar top: XX% para posiciones relativas.
+    */
+    bottom: 20px; 
+    
+    /* Asegurar que el botón esté por encima del logo */
+    z-index: 2; 
+    
+    /* Puedes ajustar el tamaño del botón si es necesario */
+    padding: 12px 25px; /* Ligeramente más pequeño */
+    font-size: 1.1em;
+    /* Añadir sombra o borde para mejor visibilidad sobre el logo */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    /* O un borde sutil */
+    /* border: 1px solid white; */
+}
+
+/* Contenedor para el logo y el botón en la pantalla de inicio */
+#start-screen-content {
+    /* Posicionamiento relativo para que el botón absoluto se posicione respecto a este */
+    position: relative;
+    /* Ocupar todo el espacio disponible del .screen */
+    width: 100%;
+    height: 100%;
+    /* Centrar contenido (aunque el botón estará posicionado absolutamente) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button { background-color: var(--accent-color); color: white; border: none; padding: 15px 30px; font-size: 1.2em; border-radius: var(--border-radius); cursor: pointer; transition: background-color 0.3s; }
+button:hover { background-color: #357abd; }
+#final-score { font-size: 3em; font-weight: bold; color: var(--accent-color); margin: 10px 0 30px; }
+
+/* --- ESTILOS PARA LA PANTALLA DE JUEGO (NUEVA LÓGICA) --- */
+#game-screen {
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* HUD */
+#hud {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.hud-item span:first-child { font-weight: bold; }
+
+/* Área de la Habitación (GRANDE ARRIBA) */
+#rooms-area {
+    width: 100%;
+    flex-grow: 1; /* Ocupa el espacio sobrante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.drop-zone {
+    width: 100%;
+    height: 100%;
+    border: 5px dashed #ccc;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.drop-zone img, .drop-zone span { display: none; }
+
+.drop-zone.drag-over {
+    border-color: var(--correct-color);
+    background-color: rgba(212, 237, 218, 0.7);
+}
+
+/* Área de Objetos (BARRA ABAJO) */
+#objects-area {
+    width: 100%;
+    /* Cambiamos a flex column para contener filas */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    /* Ajustar el gap entre filas si es necesario */
+    gap: 5px; 
+    padding: 10px 5px; /* Ajustar padding */
+    background-color: #e9ecef;
+    border-top: 1px solid #ddd;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    position: relative;
+    /* Eliminamos overflow-x: auto y flex-wrap: nowrap */
+}
+
+/* Nueva clase para cada fila de objetos */
+.object-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-around; /* Espacio igual entre objetos */
+    align-items: center;
+    /* Asegurar que los objetos no se deformen si el espacio es justo */
+    flex-shrink: 0; 
+}
+
+.draggable-object {
+    /* ¡CAMBIO PRINCIPAL! Aumentamos el tamaño. Prueba con este valor primero. */
+    width: 75px;
+    height: 75px;
+    
+    /* ¡CLAVE! Evita que el objeto se encoja si el espacio es muy justo. */
+    flex-shrink: 0; 
+    
+    cursor: grab;
+    transition: transform 0.2s ease-out;
+    user-select: none;
+    touch-action: none;
+    position: relative; 
+    z-index: 1; 
+}
+
+/* El estilo .dragging se mantiene igual, pero ahora se aplica a un objeto más grande */
+.draggable-object.dragging {
+    position: absolute; /* Esencial para el posicionamiento manual */
+    cursor: grabbing;
+    opacity: 0.8; /* Lo hace un poco translúcido para dar feedback */
+    transform: scale(2.7); /* Lo agranda un poco */
+    z-index: 1000; /* Lo pone por encima de todo */
+    pointer-events: none; /* Evita que interfiera con la detección de drop */
+}
+
+/* --- Feedback y Spinner (SIN CAMBIOS) --- */
+#feedback-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; border-radius: var(--border-radius); color: white; font-size: 2em; font-weight: bold; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; pointer-events: none; }
+#feedback-message.show { opacity: 1; visibility: visible; }
+#feedback-message.correct { background-color: var(--correct-color); }
+#feedback-message.incorrect { background-color: var(--incorrect-color); }
+
+.spinner { border: 8px solid #f3f3f3; border-top: 8px solid var(--accent-color); border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Animación de sacudida */
+@keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+.shake-animation { animation: shake 0.5s ease-in-out; }
+
+/* Media Query para monitores */
+@media (min-width: 768px) {
+    #game-container { height: 90vh; max-height: 800px; border: 1px solid #ddd; }
+}
+
+/* --- Botón de Control de Música de Fondo --- */
+.music-control-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
+    backdrop-filter: blur(2px); /* Efecto de vidrio esmerilado */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    color: #333;
+    opacity: 0.7; /* Opacidad baja como se solicitó */
+    transition: opacity 0.3s, background-color 0.3s, transform 0.2s;
+    z-index: 100; /* Asegurar que esté por encima */
+}
+
+.music-control-btn:hover {
+    opacity: 1; /* Más opaco al pasar el ratón */
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.1); /* Pequeño aumento al pasar el ratón */
+}
+
+.music-control-btn:active {
+    transform: scale(0.95); /* Efecto de clic */
+}
+
+/* Clase para indicar que la música está desactivada */
+.music-control-btn.muted::after {
+    content: "✕"; /* Una 'X' sobre el ícono */
+    position: absolute;
+    font-size: 0.7em;
+    color: red;
+    /* Ajustar posición de la 'X' */
+    top: 2px;
+    right: 2px;
+}

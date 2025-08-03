@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta tag para asegurar que el viewport se comporte correctamente en móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Dónde va esto? - El Juego</title>
+    
+    <!-- Enlace a tu hoja de estilos principal -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Carga del script principal. El atributo 'type="module"' es CRUCIAL. -->
+    <!-- Permite usar 'import' y 'export' en tus archivos JavaScript. -->
+    <script src="src/main.js" type="module" defer></script>
+</head>
+<body>
+
+    <!-- Contenedor principal del juego. Servirá para centrar y limitar el tamaño del juego en monitores grandes. -->
+    <div id="game-container">
+
+        <!-- PANTALLA DE CARGA (Opcional, pero muy recomendado) -->
+        <!-- Se muestra mientras el AssetLoader está trabajando. -->
+        <div id="loading-screen" class="screen active">
+            <h1>Cargando...</h1>
+            <div class="spinner"></div> <!-- Un simple spinner CSS -->
+        </div>
+
+          <!-- ========== NUEVA PANTALLA DE SPLASH ========== -->
+        <div id="splash-screen" class="screen">
+            <!-- El contenido ahora está vacío. El fondo se controlará con CSS. -->
+        </div>
+        <!-- =============================================== -->
+
+
+
+        <!-- PANTALLA DE INICIO / MENÚ PRINCIPAL -->
+        <!-- Esta será la primera pantalla que vea el usuario una vez cargado todo. -->
+        <div id="start-screen" class="screen">
+            <div id="start-screen-content">
+                <img src="assets/images/logo.png" alt="Logo del Juego" class="game-logo">
+                <button id="start-game-btn">¡Empezar a Jugar!</button>
+            </div>
+        </div>
+
+        <!-- PANTALLA PRINCIPAL DEL JUEGO -->
+        <!-- Aquí es donde sucede toda la acción. -->
+        <div id="game-screen" class="screen">
+            
+            <!-- Barra de información (HUD - Heads-Up Display) -->
+            <header id="hud">
+                <div class="hud-item">
+                    <span>Puntuación:</span>
+                    <span id="score-display">0</span>
+                </div>
+                <div class="hud-item">
+                    <span>Tiempo:</span>
+                    <span id="time-display">60</span>
+                </div>
+            </header>
+
+            <!-- Zona donde aparecerán los objetos para arrastrar -->
+            <section id="objects-area">
+                <!-- Los objetos se generarán dinámicamente con JavaScript aquí -->
+                <!-- Ejemplo de cómo se vería un objeto: -->
+                <!-- <img src="assets/images/objects/pan.png" class="draggable-object" data-id="pan"> -->
+            </section>
+            
+            <!-- Zona de las habitaciones donde se deben soltar los objetos -->
+            <section id="rooms-area">
+                <!-- Las zonas de destino (habitaciones) también se pueden generar dinámicamente -->
+                <!-- Ejemplo de cómo se vería una habitación (DropZone): -->
+                <!-- <div class="drop-zone" data-room-id="kitchen">
+                        <img src="assets/images/rooms/kitchen.png" alt="Cocina">
+                        <span>Cocina</span>
+                     </div> -->
+            </section>
+
+            <!-- Contenedor para mensajes flotantes (¡Correcto!, ¡Incorrecto!) -->
+            <div id="feedback-message"></div>
+
+            <!-- Botón de Control de Música de Fondo -->
+            <button id="bg-music-toggle" class="music-control-btn" aria-label="Activar/Desactivar Música de Fondo">
+                <!-- El contenido/ícono se cambiará dinámicamente por JavaScript -->
+                ♪
+            </button>
+        </div>
+
+        <!-- PANTALLA DE FIN DE JUEGO / GAME OVER -->
+        <div id="end-screen" class="screen">
+            <h1>¡Juego Terminado!</h1>
+            <h2>Tu Puntuación Final:</h2>
+            <p id="final-score">0</p>
+            <button id="restart-game-btn">Jugar de Nuevo</button>
+        </div>
+
+    </div> <!-- Fin de #game-container -->
+
+</body>
+</html>

@@ -142,16 +142,10 @@ body {
     */
     bottom: 20px; 
     
-    /* Asegurar que el botón esté por encima del logo */
     z-index: 2; 
-    
-    /* Puedes ajustar el tamaño del botón si es necesario */
-    padding: 12px 25px; /* Ligeramente más pequeño */
+    padding: 12px 25px;
     font-size: 1.1em;
-    /* Añadir sombra o borde para mejor visibilidad sobre el logo */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    /* O un borde sutil */
-    /* border: 1px solid white; */
 }
 
 /* Contenedor para el logo y el botón en la pantalla de inicio */
@@ -341,4 +335,5 @@ button:hover { background-color: #357abd; }
     /* Ajustar posición de la 'X' */
     top: 2px;
     right: 2px;
+
 }

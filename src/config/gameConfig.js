@@ -38,7 +38,7 @@ export const gameConfig = {
     gameRules: {
         pointsPerCorrect: 10,
         pointsPerIncorrect: -5,
-        timeLimitSeconds: 90,
+        timeLimitSeconds: 250,
         numCorrectObjectsPerRound: 5,
         numIncorrectObjectsPerRound: 5
     },
@@ -64,3 +64,4 @@ export const gameConfig = {
 
 
 };
+
